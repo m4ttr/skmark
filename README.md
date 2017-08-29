@@ -52,7 +52,7 @@ iptables -t mangle -I MARK-EGRESS-TOS -m mark --mark 8 -j TOS --set-tos 8
 Multi-nic Routing 
 ```
 iptables -I INPUT -i eth1 -j SKMARK --set-mark 100
-iptables -t filter −A OUTPUT −m socket −−restore-skmark −j ACCEPT
+iptables −A PREROUTING −m socket −−restore-skmark −j ACCEPT
 
 ip rule add fwmark 100 table TO_ETH1
 ip route add default <DEFAULT_GATEWAY> dev eth1 table TO_ETH1
