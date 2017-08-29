@@ -1,6 +1,6 @@
 MODULE_MAME = ipt_SKMARK
 
-KDIR ?= /usr/src/kernels/$(shell uname -r)
+KDIR ?= /lib/modules/$(shell uname -r)/build
 SOURCE_FILES = kmod/ipt_SKMARK.c
 INCLUDE_DIR = -I$(src)/include -I$(KDIR)/include/uapi -I$(KDIR)/include 
 

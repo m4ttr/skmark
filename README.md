@@ -23,7 +23,7 @@ yum install dkms
 ## Build
 ```
 dkms build .
-dkms install skmark/0.3
+dkms install skmark/1.0
 ```
 
 ## Iptable extension
