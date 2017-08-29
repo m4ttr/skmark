@@ -41,7 +41,7 @@ DSCP or ToS bit reflection
 # Create a new change to manage setting egress TOS
 iptables -N MARK-EGRESS-TOS -t mangle
 
-# Match (0x08)  8 Maximize-Throughput and set sk_mark 0 on the connections socket
+# Match (0x08)  8 Maximize-Throughput and set sk_mark 8 on the connections socket
 iptables -I INPUT -m tos --tos 8 -j SKMARK --set-mark 8
 
 # Restore the socket mark and reset ToS bit.
