@@ -1,11 +1,11 @@
 Description
 ===========
-somark is a netfilter target module and iptables extension.
+skmark is a netfilter target module and iptables extension.
 The module sets the corresponding sock->sk_mark from the matching skb.  
 
 Installation
 ============
-somark module uses dkms to build the ipt_SKMARK module. 
+skmark module uses dkms to build the ipt_SKMARK module. 
 
 ## Prerequisites:
 Debian:
@@ -47,4 +47,15 @@ iptables -I INPUT -m tos --tos 8 -j SKMARK --set-mark 8
 # Restore the socket mark and reset ToS bit.
 iptables -t filter −A OUTPUT −m socket −−restore-skmark −j MARK-EGRESS-TOS
 iptables -t mangle -I MARK-EGRESS-TOS -m mark --mark 8 -j TOS --set-tos 8
+```
+
+Multi-nic Routing 
+```
+iptables -I INPUT -i eth1 -j SKMARK --set-mark 100
+iptables -t filter −A OUTPUT −m socket −−restore-skmark −j ACCEPT
+
+ip rule add fwmark 100 table TO_ETH1
+ip route add default <DEFAULT_GATEWAY> dev eth1 table TO_ETH1
+
+# You may need to turn off rp_filter
 ```
