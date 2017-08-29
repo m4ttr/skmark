@@ -1,6 +1,6 @@
 MODULE_MAME = ipt_SKMARK
 
-KDIR ?= /usr/src/linux-headers-$(shell uname -r)
+KDIR ?= /usr/src/kernels/$(shell uname -r)
 SOURCE_FILES = kmod/ipt_SKMARK.c
 INCLUDE_DIR = -I$(src)/include -I$(KDIR)/include/uapi -I$(KDIR)/include 
 

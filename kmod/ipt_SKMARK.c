@@ -75,27 +75,15 @@ skmark_tg_v4(struct sk_buff *skb, const struct xt_action_param *par)
         struct sock *sk;
 
         sk = skb->sk;
-<<<<<<< HEAD:kmod/ipt_SKMARK.c
         if (!sk){
                 sk = skmark_tg_get_sock(skb, par->in, dev_net(skb->dev));
         }
 
         // avoid locking if sk_mark is already set
         if ((sk && sk->sk_mark == 0) && info->skmark != 0) {
-                // http://lists.openwall.net/netdev/2009/10/13/153
-                // lock_sock(sk);
                 spin_lock_bh(&sk->sk_receive_queue.lock);
                 sk->sk_mark = info->skmark;
-                // release_sock(sk);
                 spin_unlock_bh(&sk->sk_receive_queue.lock);
-=======
-        // If the SK is already set, just move along somehow
-        if (sk) {
-            sk->sk_mark = info->somark;
-        } else {
-            sk = somark_tg_get_sock(skb, par->in, dev_net(skb->dev));
-            sk->sk_mark = info->somark;
->>>>>>> removing debug stuff:kmod/xt_SOMARK.c
         }
         return XT_CONTINUE;
 }

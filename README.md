@@ -8,15 +8,22 @@ Installation
 somark module uses dkms to build the ipt_SKMARK module. 
 
 ## Prerequisites:
+Debian:
 ```
 apt-get install linux-headers-$(uname -r)
 apt-get install dkms 
+apt-get install iptables-dev
 ```
-
+Redhat:
+```
+yum install kernel-devel
+yum install iptables-devel
+yum install dkms
+```
 ## Build
 ```
 dkms build .
-dkms install somark/0.1
+dkms install skmark/0.3
 ```
 
 ## Iptable extension
@@ -39,5 +46,5 @@ iptables -I INPUT -m tos --tos 8 -j SKMARK --set-mark 8
 
 # Restore the socket mark and reset ToS bit.
 iptables -t filter −A OUTPUT −m socket −−restore-skmark −j MARK-EGRESS-TOS
-iptables -t mangle -I MARK-EGRESS-TOS -m mark --mark 5 -j TOS --set-tos 5 
+iptables -t mangle -I MARK-EGRESS-TOS -m mark --mark 8 -j TOS --set-tos 8
 ```
