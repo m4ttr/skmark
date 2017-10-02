@@ -1,7 +1,10 @@
 Description
 ===========
 skmark is a netfilter target module and iptables extension.
-The module sets the corresponding sock->sk_mark from the matching skb.  
+The module sets the corresponding sock->sk_mark from the matching skb. 
+
+The intention of this module is to allow QoS / ToS / DSCP bit reflection or interface tracking without conntrack overhead.
+
 
 Installation
 ============
